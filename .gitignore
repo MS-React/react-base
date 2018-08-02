@@ -60,8 +60,4 @@ typings/
 .env
 .vscode
 .idea
-buildlog/
-
-# Package-lock
-package-lock.json
-
+buildLog/
