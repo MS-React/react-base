@@ -65,6 +65,12 @@ npm run lint
 npm run sass-lint
 ```
 
+**build from production**
+```ssh
+npm run build
+```
+
+
 If you need to work with the current **ms-labs-be** app request access to
 
 [Mariano Ravinale](mailto:mravinale@makingsense.com)
