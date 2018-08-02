@@ -1,18 +1,17 @@
-import axios from 'axios';
-import { DEFAULT_API_USERS_ENDPOINT } from '../constants';
+import Service from './service';
 
 export function fetchUsers(params = {}) {
-  return axios.get(DEFAULT_API_USERS_ENDPOINT, { params });
+  return Service.get(params);
 }
 
 export function createUsers(data = {}) {
-  return axios.post(DEFAULT_API_USERS_ENDPOINT, { ...data });
+  return Service.post(data);
 }
 
 export function deleteUsers(userId) {
-  return axios.delete(`${DEFAULT_API_USERS_ENDPOINT}/${userId}`);
+  return Service.delete(userId);
 }
 
 export function updateUsers(userId, data = {}) {
-  return axios.put(`${DEFAULT_API_USERS_ENDPOINT}/${userId}`, { ...data });
+  return Service.put(userId, data);
 }
