@@ -1,6 +1,6 @@
 # Directly Training Frontend
 
-Directly training app, is an application with **webpack** and **react** to make additions, deletions, and modifications from users.
+Directly training app, is an application with **webpack**, **react** and **redux** to make additions, deletions, and modifications from users.
 
 This repository is the base of the feature repositories that forks from here. With the minimal setup.
 
