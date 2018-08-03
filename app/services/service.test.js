@@ -3,19 +3,18 @@ import Service from './service';
 
 jest.mock('../config/settings', () => ({
   SERVICE: {
-    baseurl: 'fakeurl'
-  }
+    baseurl: 'fakeurl',
+  },
 }));
 
 describe('Service Module', () => {
   describe('post verb', () => {
     beforeEach(() => {
-      mockAxios.post.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: ['foo', 'bar']
-        }));
+      mockAxios.post.mockImplementationOnce(() => Promise.resolve({
+        statusCode: 200,
+        statusText: 'OK',
+        data: ['foo', 'bar'],
+      }));
     });
 
     afterEach(() => {
@@ -38,24 +37,23 @@ describe('Service Module', () => {
     it('should return users from the service', () => {
       Service.post('users', {
         foo: '',
-        bar: ''
+        bar: '',
       });
 
       expect(mockAxios.post).toHaveBeenCalledWith('fakeurl/users', {
         foo: '',
-        bar: ''
+        bar: '',
       });
     });
   });
 
   describe('put verb', () => {
     beforeEach(() => {
-      mockAxios.put.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: ['foo', 'bar']
-        }));
+      mockAxios.put.mockImplementationOnce(() => Promise.resolve({
+        statusCode: 200,
+        statusText: 'OK',
+        data: ['foo', 'bar'],
+      }));
     });
 
     afterEach(() => {
@@ -77,23 +75,22 @@ describe('Service Module', () => {
 
     it('should return users from the service', () => {
       Service.put('users', 1, {
-        name: 'newname'
+        name: 'newname',
       });
 
       expect(mockAxios.put).toHaveBeenCalledWith('fakeurl/users/1', {
-        name: 'newname'
+        name: 'newname',
       });
     });
   });
 
   describe('get verb', () => {
     beforeEach(() => {
-      mockAxios.get.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: ['foo', 'bar']
-        }));
+      mockAxios.get.mockImplementationOnce(() => Promise.resolve({
+        statusCode: 200,
+        statusText: 'OK',
+        data: ['foo', 'bar'],
+      }));
     });
 
     afterEach(() => {
@@ -115,25 +112,24 @@ describe('Service Module', () => {
 
     it('should return users from the service', () => {
       Service.get('users', {
-        name: 'newname'
+        name: 'newname',
       });
 
       expect(mockAxios.get).toHaveBeenCalledWith('fakeurl/users', {
         params: {
-          name: 'newname'
-        }
+          name: 'newname',
+        },
       });
     });
   });
 
   describe('delete verb', () => {
     beforeEach(() => {
-      mockAxios.delete.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: ['foo', 'bar']
-        }));
+      mockAxios.delete.mockImplementationOnce(() => Promise.resolve({
+        statusCode: 200,
+        statusText: 'OK',
+        data: ['foo', 'bar'],
+      }));
     });
 
     afterEach(() => {

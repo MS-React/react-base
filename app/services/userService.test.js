@@ -6,22 +6,20 @@ import {
   updateUsers,
 } from './userService';
 
-jest.mock('./service', () => {
-  return {
-    get: jest.fn().mockReturnValueOnce(Promise.resolve({
-      statusCode: 200,
-      statusText: 'OK',
-      data: ['id']
-    })),
-    post: jest.fn().mockReturnValueOnce(Promise.resolve({
-      statusCode: 200,
-      statusText: 'OK',
-      data: ['id']
-    })),
-    put: jest.fn(),
-    delete: jest.fn()
-  };
-});
+jest.mock('./service', () => ({
+  get: jest.fn().mockReturnValueOnce(Promise.resolve({
+    statusCode: 200,
+    statusText: 'OK',
+    data: ['id'],
+  })),
+  post: jest.fn().mockReturnValueOnce(Promise.resolve({
+    statusCode: 200,
+    statusText: 'OK',
+    data: ['id'],
+  })),
+  put: jest.fn(),
+  delete: jest.fn(),
+}));
 
 describe('User Service', () => {
   describe('fetchUsers', () => {
@@ -53,7 +51,7 @@ describe('User Service', () => {
       // Assert
       expect(Service.get).toHaveBeenCalledWith('users', {
         foo: '',
-        bar: ''
+        bar: '',
       });
     });
   });
@@ -79,7 +77,7 @@ describe('User Service', () => {
       // Assert
       expect(Service.post).toHaveBeenCalledWith('users', {
         foo: '',
-        bar: ''
+        bar: '',
       });
     });
 
@@ -113,7 +111,7 @@ describe('User Service', () => {
       // Assert
       expect(Service.put).toHaveBeenCalledWith('users', 'id', {
         foo: '',
-        bar: ''
+        bar: '',
       });
     });
 

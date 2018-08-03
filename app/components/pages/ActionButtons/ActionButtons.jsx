@@ -21,9 +21,13 @@ const DEFAULT_USER_MODAL_LABELS = {
 
 export class ActionButtons extends React.Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     onConfirm: PropTypes.func.isRequired,
   };
+
+  static defaultProps = {
+    user: EMPTY_USER,
+  }
 
   constructor(props) {
     super(props);

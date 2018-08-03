@@ -1,7 +1,7 @@
 const settings = {
   SERVICE: {
-    baseurl: 'https://ms-labs-be.herokuapp.com/service'
-  }
+    baseurl: 'https://ms-labs-be.herokuapp.com/service',
+  },
 };
 
 if (process.env.NODE_ENV === 'local') {
