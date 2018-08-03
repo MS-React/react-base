@@ -3,11 +3,17 @@ import { shallow } from 'enzyme';
 import { ActionButtons, mapStateToProps } from './ActionButtons';
 import initialState from '../../../reducers/initialState';
 
+const defaultProps = {
+  user: {},
+  onConfirm: jest.fn(() => Promise.resolve({})),
+  onCreatedUser: jest.fn(),
+};
+
 function setup(props) {
+  const componentProps = { ...defaultProps, ...props };
   return shallow(
     <ActionButtons
-      {...props}
-      onCreateUser={jest.fn()}
+      {...componentProps}
     />,
   );
 }
@@ -173,54 +179,29 @@ describe('<ActionButtons />', () => {
   describe('saveUser handler', () => {
     it('should not saveUser', () => {
       // Arrange
-      const onConfirm = jest.fn(() => Promise.resolve({}));
-      const wrapper = setup({
-        user: {},
-        onConfirm,
-      });
+      const wrapper = setup();
 
       // Act
       wrapper.instance().saveUser();
 
       // Assert
-      expect(onConfirm).toHaveBeenCalledTimes(0);
+      expect(defaultProps.onConfirm).toHaveBeenCalledTimes(0);
     });
 
     it('should saveUser', () => {
       // Arrange
-      const onConfirm = jest.fn().mockReturnValue(Promise.resolve());
       const wrapper = setup({
         user: {
           name: 'John Doe',
           email: 'john@doe.com',
         },
-        onConfirm,
       });
 
       // Act
       wrapper.instance().saveUser();
 
       // Assert
-      expect(onConfirm).toHaveBeenCalledTimes(1);
-    });
-
-    it('should not call onConfirm when it\'s not a function', () => {
-      // Arrange
-      const onConfirm = undefined;
-      const wrapper = setup({
-        user: {
-          name: 'John Doe',
-          email: 'john@doe.com',
-        },
-        onConfirm,
-      });
-      wrapper.instance().toggle = jest.fn();
-
-      // Act
-      wrapper.instance().saveUser();
-
-      // Assert
-      expect(wrapper.instance().toggle).toHaveBeenCalledTimes(0);
+      expect(defaultProps.onConfirm).toHaveBeenCalledTimes(1);
     });
   });
 

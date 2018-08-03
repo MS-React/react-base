@@ -60,4 +60,4 @@ typings/
 .env
 .vscode
 .idea
-buildLog/
+buildlog/
