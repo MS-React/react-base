@@ -61,7 +61,3 @@ typings/
 .vscode
 .idea
 buildlog/
-
-# Package-lock
-package-lock.json
-

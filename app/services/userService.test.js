@@ -3,7 +3,7 @@ import {
   createUsers,
   deleteUsers,
   fetchUsers,
-  updateUsers
+  updateUsers,
 } from './userService';
 
 jest.mock('./service', () => {
@@ -47,7 +47,7 @@ describe('User Service', () => {
       // Act
       fetchUsers({
         foo: '',
-        bar: ''
+        bar: '',
       });
 
       // Assert
@@ -73,7 +73,7 @@ describe('User Service', () => {
       // Act
       createUsers({
         foo: '',
-        bar: ''
+        bar: '',
       });
 
       // Assert
@@ -107,7 +107,7 @@ describe('User Service', () => {
       // Act
       updateUsers('id', {
         foo: '',
-        bar: ''
+        bar: '',
       });
 
       // Assert
@@ -124,7 +124,6 @@ describe('User Service', () => {
       // Assert
       expect(Service.put).toHaveBeenCalledWith('users', 'id', {});
     });
-
   });
 
   describe('deleteUsers', () => {

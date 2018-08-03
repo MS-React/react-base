@@ -70,7 +70,6 @@ npm run sass-lint
 npm run build
 ```
 
-
 If you need to work with the current **ms-labs-be** app request access to
 
 [Mariano Ravinale](mailto:mravinale@makingsense.com)
