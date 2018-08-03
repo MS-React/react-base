@@ -12,6 +12,7 @@ module.exports = {
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**/app/index.jsx',
+    '!**/app/config/settings.js',
     '!**/app/**/PrivateRoute.jsx' // Ignored sin it's unused for now
   ],
   coverageDirectory: `${buildLogFolder}/coverage`,

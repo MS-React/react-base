@@ -1,34 +1,26 @@
 import axios from 'axios';
 import settings from '../config/settings';
 
-export class Service {
-  constructor() {
-    console.log(settings);
-    this.endpoint = settings.baseurl;
-  }
+const setRestApiUrl = (endpoint, id = undefined) => {
+  let apiUrl = `${settings.SERVICE.baseurl}/${endpoint}${id ? `/${id}` : ``}`;
 
-  setApiUrl(endpoint, id = undefined) {
-    let apiUrl = `${this.baseurl}/${endpoint}`;
-    if (id) {
-      apiUrl += `/${id}`;
-    }
+  return apiUrl;
+};
 
-    return apiUrl;
-  }
+export default {
+  get: (endpoint, params = {}) => {
+    return axios.get(setRestApiUrl(endpoint), { params });
+  },
 
-  get(endpoint, params = {}) {
-    return axios.get(this.setApiUrl(endpoint), { params });
-  }
+  post: (endpoint, data = {}) => {
+    return axios.post(setRestApiUrl(endpoint), data);
+  },
 
-  post(endpoint, data = {}) {
-    return axios.post(this.setApiUrl(endpoint), data);
-  }
+  put: (endpoint, id, data = {}) => {
+    return axios.put(setRestApiUrl(endpoint, id), data);
+  },
 
-  put(endpoint, data = {}) {
-    return axios.put(this.setApiUrl(endpoint), data);
+  delete: (endpoint, id) => {
+    return axios.delete(setRestApiUrl(endpoint, id));
   }
-
-  delete(endpoint, id) {
-    return axios.delete(this.setApiUrl(endpoint, id));
-  }
-}
+};

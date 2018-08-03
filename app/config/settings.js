@@ -1,13 +1,11 @@
-import { resolve as pathResolve } from 'path';
-import { config } from 'dotenv';
-
-const { env } = process;
-config({ path: pathResolve(__dirname, `./env/.env.${env.NODE_ENV}`) });
-
-export default {
-  environment: env.NODE_ENV,
+const settings = {
   SERVICE: {
-    baseurl: env.SERVICE_API_URL,
-    port: Number(env.SERVICE_PORT)
+    baseurl: 'https://ms-labs-be.herokuapp.com/service'
   }
 };
+
+if (process.env.NODE_ENV === 'local') {
+  settings.SERVICE.baseurl = 'http://localhost:3030/service';
+}
+
+export default settings;

@@ -1,28 +1,30 @@
-import mockAxios from 'axios';
+import * as Service from './service';
 import {
   createUsers,
   deleteUsers,
   fetchUsers,
   updateUsers
 } from './userService';
-import { DEFAULT_API_USERS_ENDPOINT } from '../constants';
+
+jest.mock('./service', () => {
+  return {
+    get: jest.fn().mockReturnValueOnce(Promise.resolve({
+      statusCode: 200,
+      statusText: 'OK',
+      data: ['id']
+    })),
+    post: jest.fn().mockReturnValueOnce(Promise.resolve({
+      statusCode: 200,
+      statusText: 'OK',
+      data: ['id']
+    })),
+    put: jest.fn(),
+    delete: jest.fn()
+  };
+});
 
 describe('User Service', () => {
   describe('fetchUsers', () => {
-    beforeEach(() => {
-      mockAxios.get.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: [ 'foo', 'bar' ]
-        })
-      );
-    });
-
-    afterEach(() => {
-      mockAxios.get.mockClear();
-    });
-
     it('should be defined', () => {
       // Assert
       expect(fetchUsers).toBeDefined();
@@ -38,7 +40,7 @@ describe('User Service', () => {
       fetchUsers();
 
       // Assert
-      expect(mockAxios.get).toHaveBeenCalledTimes(1);
+      expect(Service.get).toHaveBeenCalledTimes(1);
     });
 
     it('should call the service with the expected params', () => {
@@ -49,54 +51,14 @@ describe('User Service', () => {
       });
 
       // Assert
-      expect(mockAxios.get).toHaveBeenCalledWith(
-        DEFAULT_API_USERS_ENDPOINT,
-        {
-          params: {
-            foo: '',
-            bar: ''
-          }
-        }
-      );
-    });
-
-    it('should return users from the service', async () => {
-      // Act
-      const result = await fetchUsers();
-
-      // Assert
-      expect(result.data).toEqual([ 'foo', 'bar' ]);
-    });
-    
-    it('should call the service without any params', () => {
-      // Act
-      fetchUsers();
-
-      // Assert
-      expect(mockAxios.get).toHaveBeenCalledWith(
-        DEFAULT_API_USERS_ENDPOINT,
-        {
-          params: {}
-        }
-      );
+      expect(Service.get).toHaveBeenCalledWith('users', {
+        foo: '',
+        bar: ''
+      });
     });
   });
 
   describe('createUsers', () => {
-    beforeEach(() => {
-      mockAxios.post.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: [ 'id' ]
-        })
-      );
-    });
-
-    afterEach(() => {
-      mockAxios.post.mockClear();
-    });
-
     it('should be defined', () => {
       // Assert
       expect(createUsers).toBeDefined();
@@ -115,12 +77,10 @@ describe('User Service', () => {
       });
 
       // Assert
-      expect(mockAxios.post).toHaveBeenCalledWith(
-        DEFAULT_API_USERS_ENDPOINT,
-        {
-          foo: '',
-          bar: ''
-        });
+      expect(Service.post).toHaveBeenCalledWith('users', {
+        foo: '',
+        bar: ''
+      });
     });
 
     it('should call the service without any data', () => {
@@ -128,25 +88,11 @@ describe('User Service', () => {
       createUsers();
 
       // Assert
-      expect(mockAxios.post).toHaveBeenCalledWith(DEFAULT_API_USERS_ENDPOINT, {} );
+      expect(Service.post).toHaveBeenCalledWith('users', {});
     });
   });
 
   describe('updateUsers', () => {
-    beforeEach(() => {
-      mockAxios.put.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: [ 'id' ]
-        })
-      );
-    });
-
-    afterEach(() => {
-      mockAxios.put.mockClear();
-    });
-
     it('should be defined', () => {
       // Assert
       expect(updateUsers).toBeDefined();
@@ -165,12 +111,10 @@ describe('User Service', () => {
       });
 
       // Assert
-      expect(mockAxios.put).toHaveBeenCalledWith(
-        `${DEFAULT_API_USERS_ENDPOINT}/id`,
-        {
-          foo: '',
-          bar: ''
-        });
+      expect(Service.put).toHaveBeenCalledWith('users', 'id', {
+        foo: '',
+        bar: ''
+      });
     });
 
     it('should call the service without any data', () => {
@@ -178,27 +122,12 @@ describe('User Service', () => {
       updateUsers('id');
 
       // Assert
-      expect(mockAxios.put).toHaveBeenCalledWith(`${DEFAULT_API_USERS_ENDPOINT}/id`, {} );
+      expect(Service.put).toHaveBeenCalledWith('users', 'id', {});
     });
 
   });
 
   describe('deleteUsers', () => {
-    beforeEach(() => {
-      mockAxios.delete.mockImplementationOnce(() =>
-        Promise.resolve({
-          statusCode: 200,
-          statusText: 'OK',
-          data: [ 'id' ]
-        })
-      );
-    });
-
-    afterEach(() => {
-      mockAxios.delete.mockClear();
-    });
-
-
     it('should be defined', () => {
       // Assert
       expect(deleteUsers).toBeDefined();
@@ -214,7 +143,7 @@ describe('User Service', () => {
       deleteUsers();
 
       // Assert
-      expect(mockAxios.delete).toHaveBeenCalledTimes(1);
+      expect(Service.delete).toHaveBeenCalledTimes(1);
     });
 
     it('should call the service with the expected params', () => {
@@ -222,7 +151,7 @@ describe('User Service', () => {
       deleteUsers('id');
 
       // Assert
-      expect(mockAxios.delete).toHaveBeenCalledWith(`${DEFAULT_API_USERS_ENDPOINT}/id`);
+      expect(Service.delete).toHaveBeenCalledWith('users', 'id');
     });
   });
 });
