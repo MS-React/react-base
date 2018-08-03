@@ -1,4 +1,6 @@
 # Directly Training Frontend
+[![Build Status](https://travis-ci.com/MS-React/react-base.svg?branch=master)](https://travis-ci.com/MS-React/react-base)
+
 
 Directly training app, is an application with **webpack**, **react** and **redux** to make additions, deletions, and modifications from users.
 
