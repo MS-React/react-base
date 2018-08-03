@@ -1,5 +1,5 @@
 # Directly Training Frontend
-### Master:
+### Master
 
 [![Build Status](https://travis-ci.com/MS-React/react-base.svg?branch=master)](https://travis-ci.com/MS-React/react-base)
 
