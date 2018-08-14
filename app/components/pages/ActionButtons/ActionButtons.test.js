@@ -213,7 +213,6 @@ describe('<ActionButtons />', () => {
           name: 'name',
           value: 'John Doe',
         },
-        persist: () => null,
       };
       const expectedUserState = {
         email: 'john@doe.com',
